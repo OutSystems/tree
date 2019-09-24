@@ -27,7 +27,6 @@ var build=Task("Build")
         NpmRunScript("build");      
     Information("Ending Build");
 });
-
 var tests = Task("Tests")
 	.Does(()=>
 	{	
@@ -38,15 +37,8 @@ var tests = Task("Tests")
         Information("Ending Tests");
 	});
 
-var package = Task("Package")
-    .Does(()=>
-    {
-        Information("Starting Pack");
-        CreateDirectory("./artifacts");
-        MoveFileToDirectory(@"./package.json", @"./artifacts/"); 
-        Information("Ending Pack");
-    });
+
 Task("Default")
-    .IsDependentOn("Package");
+    .IsDependentOn("Install");
 
 RunTarget(target);
